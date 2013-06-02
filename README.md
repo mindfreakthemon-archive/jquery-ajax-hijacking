@@ -25,7 +25,7 @@ at the right time at the right place.
 If you need some persistent scripts to reload, you must actually replace jQuery's ready handler. See example to see how
 it works.
 
-### Fourth
+#### Fourth
 If you want to use your own handlers on some links to click or forms to submit, prevent propagation (and default action).
 Want default action to be executed? &mdash; Add target="_self" attribute and be sure it won't be carried by the script.
 
