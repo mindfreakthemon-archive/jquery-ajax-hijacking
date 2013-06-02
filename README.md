@@ -68,5 +68,7 @@ tl;dw
 		<!-- replaceable content -->
 	</div>
 	<!-- stuff like footer; stays the same across all ajax calls -->
+</body>
+<!-- ... --->
 ```
-This file was modified by IntelliJ IDEA 12.1.3 for binding GitHub repository
+
