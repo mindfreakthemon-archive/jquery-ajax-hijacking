@@ -14,8 +14,8 @@ technique to achieve full reload.
 
 Use `<meta name="css-hijacks" id="css-hijacks" />` and `<meta name="js-hijacks" id="js-hijacks" />` to anchor the place
 after which all your stylesheets and scripts will be inserted. By the way, all your stylesheets and scripts should
-have class `css-hijack` and `js-hijack` in order to make it reloadable. You don't need to use this classes if you want this
-tag to remain across all ajax calls.
+have class `css-hijack` and `js-hijack` in order to make it reloadable. You don't need to use this classes if you want to keep the
+tag across all ajax calls.
 
 #### Second
 Take a rule, you should always wrap your code you want to be reloadable with jQuery() for it to be executed
@@ -23,7 +23,7 @@ at the right time at the right place.
 
 #### Third
 If you need some persistent scripts to reload, you must actually replace jQuery's ready handler. See example to see how
-that works.
+it works.
 
 tl;dw
 
