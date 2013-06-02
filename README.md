@@ -83,4 +83,4 @@ enable this stuff for IE lteq 9. I guess, you should use [modernizr](http://mode
 
 # Why the heck would you do this to us?
 Why not. Also, this script should be (in theory) fully transparent, you could just comment scripts that activate hijacking
-and everything will be old school again. So yeah, if you use ajax 
+and everything will be old school again.
