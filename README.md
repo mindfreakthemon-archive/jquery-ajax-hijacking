@@ -25,6 +25,11 @@ at the right time at the right place.
 If you need some persistent scripts to reload, you must actually replace jQuery's ready handler. See example to see how
 it works.
 
+### Fourth
+If you want to use your own handlers on some links to click or forms to submit, prevent propagation (and default action).
+Want default action to be executed? &mdash; Add target="_self" attribute and be sure it won't be carried by the script.
+
+
 tl;dw
 
 ### Exapmle
@@ -72,3 +77,10 @@ tl;dw
 <!-- ... --->
 ```
 
+# Where it works? 
+Latest FF, Chrome, Opera, Safari, some mobile b.. anywhere where HTML5 History API does. That means IT'S NO USE to 
+enable this stuff for IE lteq 9. I guess, you should use [modernizr](http://modernizr.com/) in order to check it.
+
+# Why the heck would you do this to us?
+Why not. Also, this script should be (in theory) fully transparent, you could just comment scripts that activate hijacking
+and everything will be old school again. So yeah, if you use ajax 
