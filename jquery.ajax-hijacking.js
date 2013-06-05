@@ -132,18 +132,18 @@ jQuery(function ($) {
 
 	//noinspection JSValidateTypes
 	var settings = $.extend({
-		'css-hj-anchor': '#css-hijacks',
-		'css-hj-selector': '.css-hijack',
-		'js-hj-anchor': '#js-hijacks',
-		'js-hj-selector': '.js-hijack',
-		'root-element': '#ajax-hijacking-wrapper'
+		'cssHjAnchor': '#css-hijacks',
+		'cssHjSelector': '.css-hijack',
+		'jsHjAnchor': '#js-hijacks',
+		'jsHjSelector': '.js-hijack',
+		'rootElement': '#ajax-hijacking-wrapper'
 	}, $document_body.data());
 
-	var root = $(settings['root-element']),
-		css_hijacks = $(settings['css-hj-anchor']),
-		js_hijacks = $(settings['js-hj-anchor']),
-		css_selector = settings['css-hj-selector'],
-		js_selector = settings['js-hj-selector'];
+	var root = $(settings['rootElement']),
+		css_hijacks = $(settings['cssHjAnchor']),
+		js_hijacks = $(settings['jsHjAnchor']),
+		css_selector = settings['cssHjSelector'],
+		js_selector = settings['jsHjSelector'];
 
 	function request(pathname, data, type) {
 		var request_args = {
@@ -186,7 +186,7 @@ jQuery(function ($) {
 				$document.find(js_selector).remove();
 				js_hijacks.after( $data.filter(js_selector) );
 
-				root.html( $data.filter(settings['root-element']).html() );
+				root.html( $data.filter(settings['rootElement']).html() );
 
 				// altering history state
 				history.replaceState({'pathname': pathname}, document.title, pathname);
