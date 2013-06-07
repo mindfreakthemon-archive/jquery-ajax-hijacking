@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="jQuery-ajax-hijacking : Reloadless website navigation" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>jQuery-ajax-hijacking</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mindfreakthemon/jquery-ajax-hijacking">View on GitHub</a>
+
+          <h1 id="project_title">jQuery-ajax-hijacking</h1>
+          <h2 id="project_tagline">Reloadless website navigation</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mindfreakthemon/jquery-ajax-hijacking/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mindfreakthemon/jquery-ajax-hijacking/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="jquery-ajax-hijacking-subject-to-change" class="anchor" href="#jquery-ajax-hijacking-subject-to-change"><span class="octicon octicon-link"></span></a>jQuery Ajax Hijacking (subject to change)</h1>
+
+<p>jQuery plugin(?) for enabling reload-less navigating through website.
+It works by binding to all the links and forms for a click and submit events respectively.</p>
+
+<h1>
+<a name="how-to-use-it" class="anchor" href="#how-to-use-it"><span class="octicon octicon-link"></span></a>How to use it:</h1>
+
+<p>Add <code>&lt;script src="path/to/jquery.ajax-hijacking.js"&gt;&lt;/script&gt;</code> to your <code>&lt;head&gt;</code>, add <code>ajax-hijacking-wrapper</code> id attribute to your wrapper
+element and you should be fine...</p>
+
+<h3>
+<a name="except-youre-not" class="anchor" href="#except-youre-not"><span class="octicon octicon-link"></span></a>Except you're not</h3>
+
+<h4>
+<a name="first" class="anchor" href="#first"><span class="octicon octicon-link"></span></a>First</h4>
+
+<p>As you might know, one does not simply reloads all scripts and styles on the page. That's why we use some kind of
+technique to achieve full reload.</p>
+
+<p>Use <code>&lt;meta name="css-hijacks" id="css-hijacks" /&gt;</code> and <code>&lt;meta name="js-hijacks" id="js-hijacks" /&gt;</code> to anchor the place
+after which all your (re-)loaded stylesheets and scripts will be inserted. By the way, all your stylesheets and scripts should
+have class <code>css-hijack</code> and <code>js-hijack</code> in order to make it reloadable. You don't need to use this classes if you want to keep the
+tag across all ajax calls.</p>
+
+<h4>
+<a name="second" class="anchor" href="#second"><span class="octicon octicon-link"></span></a>Second</h4>
+
+<p>Take a rule, you should always wrap your code you want to be reloadable with <code>jQuery(function() { ... })</code> for it to be executed
+at the right time at the right place.</p>
+
+<h4>
+<a name="third" class="anchor" href="#third"><span class="octicon octicon-link"></span></a>Third</h4>
+
+<p>If you need some persistent scripts to reload, you must override jQuery's ready handler. See example to see how
+it works.</p>
+
+<h4>
+<a name="fourth" class="anchor" href="#fourth"><span class="octicon octicon-link"></span></a>Fourth</h4>
+
+<p>If you want to use your own handlers on some links to click or forms to submit, prevent propagation (and default action).
+Want default action to be executed? — Add target="_self" attribute and be sure it won't be carried by the script.</p>
+
+<p>tl;dw</p>
+
+<h3>
+<a name="exapmle" class="anchor" href="#exapmle"><span class="octicon octicon-link"></span></a>Exapmle</h3>
+
+<pre><code>&lt;!-- ... --&gt;
+&lt;head&gt;
+
+&lt;!-- your permanent stylesheets --&gt;
+&lt;link rel="stylesheet" type="text/css" href="..." /&gt;&lt;!-- can also be a style tag --&gt;
+
+&lt;!- your css sink tag --&gt;
+&lt;meta name="css-hijacks" id="css-hijacks" /&gt;
+
+&lt;!-- your replaceable stylesheets (may vary in templates; typically page-specific styles) --&gt;
+&lt;link rel="stylesheet" type="text/css" href="..." class="css-hijack" /&gt;&lt;!-- can also be a style tag --&gt;
+
+&lt;!-- don't forget the jQuery --&gt;
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- include this cool script, yeah --&gt;
+&lt;script src="path/tp/jquery.ajax-hijacking.js"&gt;&lt;/script&gt;
+
+&lt;!-- your casual scripts which don't depend on DOMReady event (typically libs and frameworks) --&gt;
+&lt;script src="..."&gt;&lt;/script&gt;&lt;!-- can also be an inline script --&gt;
+
+&lt;!-- your reloadable scripts (reloaded after every request; typically stuff that does something after DOMReady) --&gt;
+&lt;script&gt;jQuery.ready.persistent();&lt;/script&gt;&lt;!-- hijacking jQuery.ready --&gt;
+&lt;script src="..."&gt;&lt;/script&gt;&lt;!-- can also be an inline script --&gt;
+&lt;script&gt;jQuery.ready.restore();&lt;/script&gt;&lt;!-- restoring jQuery.ready --&gt;
+
+&lt;!-- your js sink tag --&gt;
+&lt;meta name="js-hijacks" id="js-hijacks" /&gt;
+
+&lt;!-- your replaceable scripts (may vary in templates; typically page-specific scripts) --&gt;
+&lt;script src="..." class="js-hijack"&gt;&lt;/script&gt;&lt;!-- can also be an inline script --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- stuff like header; stays the same across all ajax calls --&gt;
+    &lt;div id="ajax-hijacking-wrapper"&gt;
+        &lt;!-- replaceable content --&gt;
+    &lt;/div&gt;
+    &lt;!-- stuff like footer; stays the same across all ajax calls --&gt;
+&lt;/body&gt;
+&lt;!-- ... ---&gt;
+</code></pre>
+
+<h1>
+<a name="where-it-works" class="anchor" href="#where-it-works"><span class="octicon octicon-link"></span></a>Where it works?</h1>
+
+<p>Latest FF, Chrome, Opera, Safari, some mobile b.. anywhere where HTML5 History API does. That means IT'S NO USE to 
+enable this stuff for IE lteq 9. I guess, you should use <a href="http://modernizr.com/">modernizr</a> in order to check it.</p>
+
+<h1>
+<a name="why-the-heck-would-you-do-this-to-us" class="anchor" href="#why-the-heck-would-you-do-this-to-us"><span class="octicon octicon-link"></span></a>Why the heck would you do this to us?</h1>
+
+<p>Why not. Also, this script should be (in theory) fully transparent, you could just comment scripts that activate hijacking
+and everything will be old school again.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">jQuery-ajax-hijacking maintained by <a href="https://github.com/mindfreakthemon">mindfreakthemon</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
