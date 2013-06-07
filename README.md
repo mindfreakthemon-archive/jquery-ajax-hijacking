@@ -1,10 +1,10 @@
 # jQuery Ajax Hijacking (subject to change)
 jQuery plugin(?) for enabling reload-less navigating through website.
-It works by binding to all the links and forms for a click and submit event respectively.
+It works by binding to all the links and forms for a click and submit events respectively.
 
 # How to use it:
-Add `<script src="path/to/jquery.ajax-hijacking.js"></script>`, add `ajax-hijacking-wrapper` id to one of yours wrapper
-elements and you should be fine...
+Add `<script src="path/to/jquery.ajax-hijacking.js"></script>` to your `<head>`, add `ajax-hijacking-wrapper` id attribute to your wrapper
+element and you should be fine...
 
 ### Except you're not
 
@@ -13,16 +13,16 @@ As you might know, one does not simply reloads all scripts and styles on the pag
 technique to achieve full reload.
 
 Use `<meta name="css-hijacks" id="css-hijacks" />` and `<meta name="js-hijacks" id="js-hijacks" />` to anchor the place
-after which all your stylesheets and scripts will be inserted. By the way, all your stylesheets and scripts should
+after which all your (re-)loaded stylesheets and scripts will be inserted. By the way, all your stylesheets and scripts should
 have class `css-hijack` and `js-hijack` in order to make it reloadable. You don't need to use this classes if you want to keep the
 tag across all ajax calls.
 
 #### Second
-Take a rule, you should always wrap your code you want to be reloadable with jQuery() for it to be executed
+Take a rule, you should always wrap your code you want to be reloadable with `jQuery(function() { ... })` for it to be executed
 at the right time at the right place.
 
 #### Third
-If you need some persistent scripts to reload, you must actually replace jQuery's ready handler. See example to see how
+If you need some persistent scripts to reload, you must override jQuery's ready handler. See example to see how
 it works.
 
 #### Fourth
