@@ -211,7 +211,13 @@ jQuery(function ($) {
 
 		$window.trigger('location-changing');
 
-		$.ajax(pathname, request_args);
+		$.ajax(pathname, request_args)
+			.fail(function (jqXHR, textStatus, errorThrown) {
+				$window.trigger('location-change-error', [jqXHR, textStatus, errorThrown]);
+			})
+			.always(function () {
+				$window.trigger('location-change-done');
+			});
 	}
 
 	var initial = location.pathname + location.search,
